@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "node scripts/build.mjs",
+    "build:next": "next build",
     "dev": "next dev",
+    "setup:db": "node scripts/setup-local-db.mjs",
     "lint": "next lint",
-    "migrate": "dotenv -- ley --require tsm",
+    "migrate": "dotenv -- ley up --require tsm",
     "start": "next start"
   },
   "dependencies": {
@@ -42,9 +44,13 @@
     "@types/dotenv-safe": "^8.1.2",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
+    "embedded-postgres": "^18.4.0-beta.17",
     "eslint-config-upleveled": "^5.0.0",
+    "libsodium-wrappers": "^0.8.4",
     "stylelint": "^15.6.2",
     "stylelint-config-upleveled": "^1.0.2",
+    "tweetnacl": "^1.0.3",
+    "tweetsodium": "^0.0.4",
     "typescript": "^5.0.4"
   }
 }

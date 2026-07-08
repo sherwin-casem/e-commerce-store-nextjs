@@ -31,7 +31,7 @@ export default async function SingleProductPage({ params }) {
   const ratings = allreviews.map((review) => review.rating);
 
   const sum = ratings.reduce((total, rating) => total + rating, 0);
-  const averageRating = sum / ratings.length;
+  const averageRating = ratings.length > 0 ? sum / ratings.length : 0;
 
   // 2. check if the sessionToken has a valid session const user = sessionTokenCookie &&
 

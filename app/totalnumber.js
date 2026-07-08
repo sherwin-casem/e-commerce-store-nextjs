@@ -1,12 +1,12 @@
 import { getQuantity } from './products/[productId]/actions';
 import styles from './totalNumber.module.css';
 
-export default function TotalNumber() {
-  async function showProductAmount() {
-    const currentProducts = await getQuantity();
+export default async function TotalNumber() {
+  const currentProducts = await getQuantity();
+  const total = currentProducts.reduce(
+    (sum, item) => sum + item.quantity,
+    0,
+  );
 
-    return currentProducts.reduce((total, item) => total + item.quantity, 0);
-  }
-
-  return <p className={styles.totalNumber}>{showProductAmount()}</p>;
+  return <p className={styles.totalNumber}>{total}</p>;
 }

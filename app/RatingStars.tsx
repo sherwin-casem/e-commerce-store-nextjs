@@ -1,8 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { submitReview } from '../database/reviews';
-// import styles from './globalMediaQueries.scss';
 import Star from './Star';
 
 type Props = {

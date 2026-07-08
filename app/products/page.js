@@ -51,7 +51,10 @@ export default async function ProductsPage() {
           const ratings = productReview.map((review) => review.rating);
           console.log('ratings', ratings);
           const sum = ratings.reduce((total, rating) => total + rating, 0);
-          const averageRating = Math.round((sum / ratings.length) * 10) / 10;
+          const averageRating =
+            ratings.length > 0
+              ? Math.round((sum / ratings.length) * 10) / 10
+              : 0;
           // const averageRating = sum / ratings.length;
           console.log(
             'average rating',

@@ -1,13 +1,20 @@
+const { parse } = require('pg-connection-string');
+
 const options = {};
 
-if (process.env.POSTGRES_URL) {
-  options.ssl = true;
+const connectionUrl =
+  process.env.POSTGRES_URL_DIRECT || process.env.POSTGRES_URL;
 
-  // Set standard environment variables
-  process.env.PGHOST = process.env.POSTGRES_HOST;
-  process.env.PGDATABASE = process.env.POSTGRES_DATABASE;
-  process.env.PGUSERNAME = process.env.POSTGRES_USER;
-  process.env.PGPASSWORD = process.env.POSTGRES_PASSWORD;
+if (connectionUrl) {
+  const config = parse(connectionUrl);
+  process.env.PGHOST = config.host;
+  process.env.PGPORT = String(config.port || 5432);
+  process.env.PGUSERNAME = config.user;
+  process.env.PGPASSWORD = config.password;
+  process.env.PGDATABASE = config.database;
+  options.ssl = 'require';
+} else if (process.env.NODE_ENV === 'production') {
+  options.ssl = { rejectUnauthorized: false };
 }
 
 module.exports = options;
